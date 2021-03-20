@@ -28,7 +28,7 @@ class StorageX extends ChangeNotifier {
   }
 
   Future<String> saveImage(Asset asset) async {
-    String uploadUrl = '';
+    String uploadUrlX = '';
     ByteData byteData =
         await asset.getByteData(); // requestOriginal is being deprecated
     List<int> imageData = byteData.buffer.asUint8List();
@@ -41,11 +41,12 @@ class StorageX extends ChangeNotifier {
       notifyListeners();
     });
     uploadTask.whenComplete(() async {
-      uploadUrl = await ref.getDownloadURL();
+      var uploadUrl = await ref.getDownloadURL();
+      uploadUrlX = uploadUrl;
     }).catchError((onError) {
       uploadStart = false;
     });
 
-    return uploadUrl;
+    return uploadUrlX;
   }
 }
