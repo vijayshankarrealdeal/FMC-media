@@ -20,18 +20,6 @@ class StorageX extends ChangeNotifier {
     }
   }
 
-  Future<Uint8List> testComporessList(Uint8List list) async {
-    var result = await FlutterImageCompress.compressWithList(
-      list,
-      minHeight: 500,
-      minWidth: 500,
-      quality: 87,
-    );
-    print(list.length);
-    print(result.length);
-    return result;
-  }
-
   Future<String> saveImage(Asset asset) async {
     String url = '';
     ByteData byteData =
