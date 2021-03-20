@@ -9,7 +9,8 @@ import 'package:path_provider/path_provider.dart';
 
 class StorageX extends ChangeNotifier {
   final _refrence = FirebaseStorage.instance;
-
+  double percent = 0;
+  bool uploadStart = false;
   Future<void> uploadExample(File file) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String filePath = '${appDocDir.absolute}/$file';
@@ -20,19 +21,33 @@ class StorageX extends ChangeNotifier {
     }
   }
 
+  void uploadTaskBegin() {
+    if (uploadStart == true) {
+      uploadStart = false;
+      notifyListeners();
+    } else {
+      uploadStart = true;
+      notifyListeners();
+    }
+  }
+
   Future<String> saveImage(Asset asset) async {
     String url = '';
     ByteData byteData =
         await asset.getByteData(); // requestOriginal is being deprecated
     List<int> imageData = byteData.buffer.asUint8List();
 
-    Reference ref = _refrence.ref().child(DateTime.now()
-        .toString()); // To be aligned with the latest firebase API(4.0)
+    Reference ref = _refrence.ref().child(DateTime.now().toString());
+    // To be aligned with the latest firebase API(4.0)
     UploadTask uploadTask = ref.putData(imageData);
+    uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
+      percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      notifyListeners();
+    });
     uploadTask.whenComplete(() async {
       url = await ref.getDownloadURL();
     }).catchError((onError) {
-      print(onError);
+      uploadStart = false;
     });
     return url;
   }
