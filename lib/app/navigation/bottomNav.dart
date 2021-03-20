@@ -20,7 +20,7 @@ class MaterialBottomNavigationBar extends StatelessWidget {
           children: [
             IconButton(
                 icon: Icon(
-                  CupertinoIcons.app_badge,
+                  CupertinoIcons.app,
                   size: nav.active[0] ? nav.size : nav.activesize,
                   color: nav.active[0] ? nav.color : nav.activeColor,
                 ),
@@ -30,7 +30,7 @@ class MaterialBottomNavigationBar extends StatelessWidget {
                 }),
             IconButton(
                 icon: Icon(
-                  CupertinoIcons.heart,
+                  CupertinoIcons.bell,
                   size: nav.active[1] ? nav.size : nav.activesize,
                   color: nav.active[1] ? nav.color : nav.activeColor,
                 ),
