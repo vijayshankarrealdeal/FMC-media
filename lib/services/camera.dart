@@ -16,6 +16,9 @@ class PickImage extends ChangeNotifier {
     }
 
     images = resultList;
+    if (images == null) {
+      throw Exception("Choose a Imgae");
+    }
     if (error == null) errorx = 'No Error Dectected';
     notifyListeners();
   }

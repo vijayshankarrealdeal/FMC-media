@@ -6,10 +6,12 @@ class StudentDetails {
   final String gender;
   final String name;
   final String phoneNumber;
+  final bool anyNotification;
 
   final bool firstTime;
   StudentDetails({
     this.uid,
+    this.anyNotification,
     this.email,
     this.firstTime,
     this.classroomID,
@@ -37,6 +39,7 @@ class StudentDetails {
       return null;
     } else {
       return StudentDetails(
+        anyNotification: data['anyNotification'] ?? false,
         uid: data['uid'] ?? '',
         firstTime: data['firstTime'] == null ? false : data['firstTime'],
         email: data['email'] == null ? '' : data['email'],
