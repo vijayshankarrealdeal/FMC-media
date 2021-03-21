@@ -11,6 +11,7 @@ class StorageX extends ChangeNotifier {
   final _refrence = FirebaseStorage.instance;
   double percent = 0;
   bool uploadStart = false;
+  List uploadUrlX = [];
 
   Future<void> uploadExample(File file) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
@@ -27,8 +28,7 @@ class StorageX extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String> saveImage(Asset asset) async {
-    String uploadUrlX = '';
+  Future<void> saveImage(Asset asset) async {
     ByteData byteData =
         await asset.getByteData(); // requestOriginal is being deprecated
     List<int> imageData = byteData.buffer.asUint8List();
@@ -42,11 +42,9 @@ class StorageX extends ChangeNotifier {
     });
     uploadTask.whenComplete(() async {
       var uploadUrl = await ref.getDownloadURL();
-      uploadUrlX = uploadUrl;
+      uploadUrlX.add(uploadUrl);
     }).catchError((onError) {
       uploadStart = false;
     });
-
-    return uploadUrlX;
   }
 }

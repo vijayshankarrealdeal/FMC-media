@@ -111,46 +111,70 @@ class AccountExtends extends StatelessWidget {
                 SizedBox(height: 10),
                 !sX.uploadStart
                     ? Center(
-                        child: CupertinoButton(
-                          color: data[0].isAnyComp
-                              ? CupertinoColors.systemRed
-                              : CupertinoColors.inactiveGray,
-                          child: Text('      Upload     '),
-                          onPressed: () async {
-                            pickImage.images.isNotEmpty
-                                ? sX.uploadTaskBegin()
-                                : print('');
-                            try {
-                              if (pickImage.images.isNotEmpty
-                                  //&& data[0].isAnyComp
+                        child: sX.uploadUrlX.isEmpty
+                            ? CupertinoButton(
+                                color: data[0].isAnyComp
+                                    ? CupertinoColors.systemRed
+                                    : CupertinoColors.inactiveGray,
+                                child: Text('      Upload     '),
+                                onPressed: () async {
+                                  pickImage.images.isNotEmpty
+                                      ? sX.uploadTaskBegin()
+                                      : print('');
+                                  try {
+                                    if (pickImage.images.isNotEmpty
+                                        //&& data[0].isAnyComp
 
-                                  ) {
-                                await da.addImages(
-                                    StudentUpload(
-                                      imagesId: idF,
-                                      uid: da.uid,
-                                      time: DateTime.now().toString(),
-                                      uploadUrl: '',
-                                    ),
-                                    idF);
-                                for (int i = 0;
-                                    i < pickImage.images.length;
-                                    i++) {
-                                  String url =
-                                      await sX.saveImage(pickImage.images[i]);
-                                  await da.addImagesXX(idF, url, i.toString());
-                                  print(url);
-                                }
-                              } else {
-                                throw Exception(
-                                    "Select a image Or No competition is there");
-                              }
-                            } catch (e) {
-                              dialog(context, e.message);
-                            }
-                            pickImage.images.clear();
-                          },
-                        ),
+                                        ) {
+                                      for (int i = 0;
+                                          i < pickImage.images.length;
+                                          i++) {
+                                        await sX.saveImage(pickImage.images[i]);
+                                      }
+                                    } else {
+                                      throw Exception(
+                                          "Select a image Or No competition is there");
+                                    }
+                                  } catch (e) {
+                                    dialog(context, e.message);
+                                  }
+
+                                  pickImage.images.clear();
+                                },
+                              )
+                            : Column(
+                                children: [
+                                  Text('Yes I Confirm to Upload these images'),
+                                  CupertinoButton(
+                                    color: CupertinoColors.systemRed,
+                                    child: Text('      Confirm     '),
+                                    onPressed: () async {
+                                      await da.addImages(
+                                          StudentUpload(
+                                            imagesId: idF,
+                                            uid: da.uid,
+                                            time: DateTime.now().toString(),
+                                            uploadUrl: '',
+                                          ),
+                                          idF);
+                                      for (int i = 0;
+                                          i < sX.uploadUrlX.length;
+                                          i++) {
+                                        await da.addImagesXX(idF,
+                                            sX.uploadUrlX[i], i.toString());
+                                      }
+                                      sX.uploadUrlX.clear();
+                                    },
+                                  ),
+                                  CupertinoButton(
+                                    color: CupertinoColors.inactiveGray,
+                                    child: Text('       Deny      '),
+                                    onPressed: () async {
+                                      sX.uploadUrlX.clear();
+                                    },
+                                  ),
+                                ],
+                              ),
                       )
                     : Center(child: CircularProgressIndicator()),
               ],
