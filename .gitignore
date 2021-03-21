@@ -45,8 +45,6 @@ android/key.properties
 /android/app/release
 FMC-MEDIA/android/app/google-services.json
 main.dart
-lib/services/database.dart
-lib/services/auth.dart
-lib/*
+
 
 
