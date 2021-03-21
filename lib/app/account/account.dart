@@ -50,12 +50,25 @@ class AccountExtends extends StatelessWidget {
             child: Column(
               children: [
                 Container(width: double.infinity),
-                Text(details.email),
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(details.name),
+                        Text(details.email),
+                      ],
+                    ),
+                  ),
+                ),
                 sX.percent == 0
                     ? Expanded(
                         flex: 1,
                         child: Container(
-                          height: 400,
+                          height: MediaQuery.of(context).size.height * 0.4,
                           child: GridView.count(
                             crossAxisCount: 3,
                             children: List.generate(
@@ -142,38 +155,45 @@ class AccountExtends extends StatelessWidget {
                                   pickImage.images.clear();
                                 },
                               )
-                            : Column(
-                                children: [
-                                  Text('Yes I Confirm to Upload these images'),
-                                  CupertinoButton(
-                                    color: CupertinoColors.systemRed,
-                                    child: Text('      Confirm     '),
-                                    onPressed: () async {
-                                      await da.addImages(
-                                          StudentUpload(
-                                            imagesId: idF,
-                                            uid: da.uid,
-                                            time: DateTime.now().toString(),
-                                            uploadUrl: '',
-                                          ),
-                                          idF);
-                                      for (int i = 0;
-                                          i < sX.uploadUrlX.length;
-                                          i++) {
-                                        await da.addImagesXX(idF,
-                                            sX.uploadUrlX[i], i.toString());
-                                      }
-                                      sX.uploadUrlX.clear();
-                                    },
-                                  ),
-                                  CupertinoButton(
-                                    color: CupertinoColors.inactiveGray,
-                                    child: Text('       Deny      '),
-                                    onPressed: () async {
-                                      sX.uploadUrlX.clear();
-                                    },
-                                  ),
-                                ],
+                            : Padding(
+                                padding: const EdgeInsets.all(18.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                        'Yes I Confirm to Upload these images'),
+                                    CupertinoButton(
+                                      color: CupertinoColors.systemRed,
+                                      child: Text('      Confirm     '),
+                                      onPressed: () async {
+                                        await da.addImages(
+                                            StudentUpload(
+                                              imagesId: idF,
+                                              uid: da.uid,
+                                              time: DateTime.now().toString(),
+                                              uploadUrl: '',
+                                            ),
+                                            idF);
+                                        for (int i = 0;
+                                            i < sX.uploadUrlX.length;
+                                            i++) {
+                                          await da.addImagesXX(idF,
+                                              sX.uploadUrlX[i], i.toString());
+                                        }
+                                        sX.uploadUrlX.clear();
+                                      },
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(18.0),
+                                      child: CupertinoButton(
+                                        color: CupertinoColors.inactiveGray,
+                                        child: Text('       Deny       '),
+                                        onPressed: () async {
+                                          sX.uploadUrlX.clear();
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                       )
                     : Center(child: CircularProgressIndicator()),

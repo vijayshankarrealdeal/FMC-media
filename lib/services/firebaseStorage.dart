@@ -43,6 +43,7 @@ class StorageX extends ChangeNotifier {
     uploadTask.whenComplete(() async {
       var uploadUrl = await ref.getDownloadURL();
       uploadUrlX.add(uploadUrl);
+      notifyListeners();
     }).catchError((onError) {
       uploadStart = false;
     });

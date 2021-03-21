@@ -1,6 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fmc/model/imageModel.dart';
+import 'package:fmc/model/leaderBoardModel.dart';
 import 'package:fmc/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +40,7 @@ class LeaderBoardExtends extends StatelessWidget {
             body: Container(
                 margin: EdgeInsets.only(top: 18.0),
                 child: ListView.builder(
-                    itemCount: 200,
+                    itemCount: df.length,
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         //onDoubleTap: () => print(isLiked),
@@ -58,12 +59,12 @@ class LeaderBoardExtends extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(13.0),
                                           color: Colors.red,
-                                          // image: DecorationImage(
-                                          //   image: CachedNetworkImageProvider(
-                                          //     l[i].poster,
-                                          //   ),
-                                          //   fit: BoxFit.cover,
-                                          // ),
+                                          image: DecorationImage(
+                                            image: CachedNetworkImageProvider(
+                                              df[i].fisrt,
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                         height:
                                             MediaQuery.of(context).size.height *

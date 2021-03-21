@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fmc/model/notification.dart';
 import 'package:fmc/services/database.dart';
@@ -34,14 +35,28 @@ class NoticeBoardExtended extends StatelessWidget {
         ),
       ),
       body: not == null
-          ? CircularProgressIndicator()
+          ? Center(child: CircularProgressIndicator())
           : Container(
-              color: Colors.amber,
               child: ListView.builder(
                   itemCount: not.length,
                   itemBuilder: (context, i) {
-                    return ClipRRect(
-                      child: Text(not[i].title),
+                    return Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        decoration: BoxDecoration(
+                          color: CupertinoColors.white,
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(not[i].title),
+                            Text(not[i].subTitle),
+                            Text(not[i].details),
+                            Text(not[i].deadLine),
+                          ],
+                        ),
+                      ),
                     );
                   }),
             ),

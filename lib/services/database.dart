@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fmc/model/admin.dart';
-import 'package:fmc/model/imageModel.dart';
+import 'package:fmc/model/leaderBoardModel.dart';
 import 'package:fmc/model/notification.dart';
 import 'package:fmc/model/studentDetail.dart';
 import 'package:fmc/model/studentUpload.dart';
@@ -51,7 +51,7 @@ class Database extends ChangeNotifier {
   }
 
   Stream<List<LeaderBoardModel>> leader() {
-    return _dbrefrence.collection('notifi').snapshots().map((event) =>
+    return _dbrefrence.collection('images').snapshots().map((event) =>
         event.docs.map((e) => LeaderBoardModel.fromMap(e.data())).toList());
   }
 }
