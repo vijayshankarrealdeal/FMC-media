@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fmc/model/admin.dart';
 import 'package:fmc/model/leaderBoardModel.dart';
 import 'package:fmc/model/notification.dart';
+import 'package:fmc/model/searchMatchUser.dart';
 import 'package:fmc/model/studentDetail.dart';
 import 'package:fmc/model/studentUpload.dart';
 
@@ -38,6 +39,16 @@ class Database extends ChangeNotifier {
         .snapshots()
         .map((event) =>
             event.docs.map((e) => StudentDetails.fromMap(e.data())).toList());
+  }
+
+  Stream<List<SearchAndMatchUser>> filterStudent(String uidXX) {
+    return _dbrefrence
+        .collection('student')
+        .where("uid", isEqualTo: uidXX)
+        .limit(1)
+        .snapshots()
+        .map((event) =>
+            event.docs.map((e) => SearchAndMatchUser.fromMap(e.data())).toList());
   }
 
   Stream<List<AdminControl>> adminXD() {
