@@ -45,6 +45,18 @@ class AccountExtends extends StatelessWidget {
       return Center(child: CircularProgressIndicator());
     } else {
       return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+          title: Text(
+            'Account',
+            style: TextStyle(
+              fontFamily: 'SF-Pro-Display-Bold',
+              fontSize: 34,
+              color: Color.fromRGBO(0, 0, 0, 1),
+            ),
+          ),
+        ),
         body: SafeArea(
           child: Container(
             child: Column(
@@ -135,10 +147,8 @@ class AccountExtends extends StatelessWidget {
                                       ? sX.uploadTaskBegin()
                                       : print('');
                                   try {
-                                    if (pickImage.images.isNotEmpty
-                                        //&& data[0].isAnyComp
-
-                                        ) {
+                                    if (pickImage.images.isNotEmpty &&
+                                        data[0].isAnyComp) {
                                       for (int i = 0;
                                           i < pickImage.images.length;
                                           i++) {

@@ -36,6 +36,7 @@ dependencies:
   image: ^3.0.2
   multi_image_picker: ^4.8.0
   uuid: ^3.0.1
+  firebase_messaging: ^9.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -58,9 +59,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - images/1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -73,6 +73,49 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+      - family: Athelas-Regular
+        fonts:
+          - asset: fonts/Athelas-Regular.ttf
+      - family: bitstream
+        fonts:
+          - asset: fonts/bitstream.ttf
+      - family: Charter-Regular
+        fonts:
+          - asset: fonts/Charter-Regular.ttf
+      - family: pala
+        fonts:
+          - asset: fonts/pala.ttf
+      - family: Seravek
+        fonts:
+          - asset: fonts/Seravek.ttf
+      - family: times-new-roman
+        fonts:
+          - asset: fonts/times-new-roman.ttf
+      - family: SFUIText-Regular
+        fonts:
+          - asset: fonts/SFUIText-Regular.otf
+      - family: NewYork
+        fonts:
+          - asset: fonts/NewYork.ttf
+      - family: SF-Pro
+        fonts:
+          - asset: fonts/SF-Pro.ttf
+      - family: SF-Pro-Rounded-Regular
+        fonts:
+          - asset: fonts/SF-Pro-Rounded-Regular.otf
+      - family: SF-Pro-Display-Bold
+        fonts:
+          - asset: fonts/SF-Pro-Display-Bold.otf
+      - family: SF-Pro-Text-Semibold
+        fonts:
+          - asset: fonts/SF-Pro-Text-Semibold.otf
+      - family: SF-Pro-Text-Regular
+        fonts:
+          - asset: fonts/SF-Pro-Text-Regular.otf
+      - family: SF-Pro-Text-Medium
+        fonts:
+          - asset: fonts/SF-Pro-Text-Medium.otf
   # fonts:
   #   - family: Schyler
   #     fonts:
