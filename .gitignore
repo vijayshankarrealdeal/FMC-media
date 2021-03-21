@@ -45,6 +45,7 @@ android/key.properties
 /android/app/release
 FMC-MEDIA/android/app/google-services.json
 main.dart
+google-services.json
 
 
 
