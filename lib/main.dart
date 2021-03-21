@@ -36,18 +36,22 @@ class MyApp extends StatelessWidget {
             if (user == null) {
               return MaterialApp(home: LoginSign());
             } else {
-              return MultiProvider(providers: [
-                ChangeNotifierProvider(
-                  create: (context) => User(
-                    uid: user.uid,
-                    email: user.email,
-                  ),
-                ),
-                ChangeNotifierProvider(
-                  create: (context) =>
-                      Database(uid: user.uid, email: user.email),
-                ),
-              ], child: MaterialApp(home: DessionTree(uid: user.uid)));
+              return MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(
+                      create: (context) => User(
+                        uid: user.uid,
+                        email: user.email,
+                      ),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) =>
+                          Database(uid: user.uid, email: user.email),
+                    ),
+                  ],
+                  child: MaterialApp(
+                      debugShowCheckedModeBanner: false,
+                      home: DessionTree(uid: user.uid)));
             }
           } else {
             return Center(child: CircularProgressIndicator());
