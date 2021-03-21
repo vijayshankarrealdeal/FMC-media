@@ -32,12 +32,12 @@ class TextForms extends StatelessWidget {
         child: CupertinoTextField(
           autofocus: moveUP,
           enabled: isspin,
-          style: TextStyle(color: Color.fromRGBO(0, 0, 0, 1)),
+          style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
           decoration: BoxDecoration(
-              color: Color.fromRGBO(118, 118, 118, 0.12),
-              borderRadius: BorderRadius.circular(5.0)),
+              color: Color.fromRGBO(118, 118, 118, 0.24),
+              borderRadius: BorderRadius.circular(8.0)),
           placeholderStyle: TextStyle(
-            color: Color.fromRGBO(60, 60, 67, 0.60),
+            color: Color.fromRGBO(235, 235, 245, 0.60),
           ),
           controller: enter,
           obscureText: hide,

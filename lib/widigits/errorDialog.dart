@@ -10,36 +10,39 @@ void dialog(BuildContext context, String message) {
   showDialog(
       context: context,
       builder: (BuildContext context) {
-        return CupertinoAlertDialog(
-          title: Text(
-            'Error',
-            style: TextStyle(
-              color: Color.fromRGBO(0, 0, 0, 1),
-              fontFamily: 'SF-Pro-Text-Semibold',
-              fontSize: 17,
-            ),
-          ),
-          content: Text(
-            message,
-            style: TextStyle(
-              color: Color.fromRGBO(0, 0, 0, 1),
-              fontFamily: 'SF-Pro-Text-Regular',
-              fontSize: 13,
-            ),
-          ),
-          actions: [
-            CupertinoButton(
-              child: Text(
-                'Back',
-                style: TextStyle(
-                  color: Color.fromRGBO(0, 122, 255, 1),
-                  fontFamily: 'SF-Pro-Text-Regular',
-                  fontSize: 17,
-                ),
+        return Theme(
+          data: ThemeData.dark(),
+          child: CupertinoAlertDialog(
+            title: Text(
+              'Error',
+              style: TextStyle(
+                color: Color.fromRGBO(255, 255, 255, 1),
+                fontFamily: 'SF-Pro-Text-Semibold',
+                fontSize: 17,
               ),
-              onPressed: () => Navigator.pop(context),
             ),
-          ],
+            content: Text(
+              message,
+              style: TextStyle(
+                color: Color.fromRGBO(255, 255, 255, 1),
+                fontFamily: 'SF-Pro-Text-Regular',
+                fontSize: 13,
+              ),
+            ),
+            actions: [
+              CupertinoButton(
+                child: Text(
+                  'Back',
+                  style: TextStyle(
+                    color: Color.fromRGBO(255, 69, 58, 1),
+                    fontFamily: 'SF-Pro-Text-Regular',
+                    fontSize: 17,
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          ),
         );
       });
 }

@@ -22,15 +22,16 @@ class NoticeBoardExtended extends StatelessWidget {
   Widget build(BuildContext context) {
     final not = Provider.of<List<Notificationxx>>(context);
     return Scaffold(
+      backgroundColor: CupertinoColors.black,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+        backgroundColor: Color.fromRGBO(29, 29, 29, 1),
         title: Text(
           'Notifications',
           style: TextStyle(
             fontFamily: 'SF-Pro-Display-Bold',
             fontSize: 34,
-            color: Color.fromRGBO(0, 0, 0, 1),
+            color: Color.fromRGBO(255, 255, 255, 1),
           ),
         ),
       ),
@@ -43,18 +44,52 @@ class NoticeBoardExtended extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.2,
+                        height: MediaQuery.of(context).size.height * 0.28,
                         decoration: BoxDecoration(
-                          color: CupertinoColors.white,
+                          color: Color.fromRGBO(38, 38, 41, 1),
                           borderRadius: BorderRadius.circular(12.0),
                         ),
-                        child: Column(
-                          children: [
-                            Text(not[i].title),
-                            Text(not[i].subTitle),
-                            Text(not[i].details),
-                            Text(not[i].deadLine),
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                not[i].title,
+                                style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontFamily: 'SF-Pro-Display-Bold',
+                                  fontSize: 28.0,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                not[i].subTitle,
+                                style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontFamily: 'SF-Pro-Text-Semibold',
+                                  fontSize: 17.0,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                not[i].details,
+                                style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontFamily: 'SF-Pro-Text-Regular',
+                                  fontSize: 17.0,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                not[i].deadLine,
+                                style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  fontFamily: 'SF-Pro-Display-Bold',
+                                  fontSize: 28.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );

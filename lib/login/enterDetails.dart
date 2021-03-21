@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fmc/model/studentDetail.dart';
 import 'package:fmc/services/auth.dart';
 import 'package:fmc/services/database.dart';
+import 'package:fmc/widigits/errorDialog.dart';
 import 'package:fmc/widigits/textForm.dart';
 
 class EnterDetailsPage extends StatefulWidget {
@@ -29,6 +30,7 @@ class _EnterDetailsPageState extends State<EnterDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CupertinoColors.black,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -54,8 +56,16 @@ class _EnterDetailsPageState extends State<EnterDetailsPage> {
                   ),
                   TextForms(placeholder: 'Name', hide: false, enter: _name),
                   SizedBox(height: 25),
-                  Text('Select BirthDate'),
+                  Text(
+                    'Select BirthDate',
+                    style: TextStyle(
+                      fontFamily: 'SF-Pro-Display-Bold',
+                      fontSize: 20,
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                  ),
                   Container(
+                    color: Color.fromRGBO(118, 118, 118, 0.24),
                     height: MediaQuery.of(context).size.height * 0.15,
                     child: CupertinoDatePicker(
                       mode: CupertinoDatePickerMode.date,
@@ -65,7 +75,14 @@ class _EnterDetailsPageState extends State<EnterDetailsPage> {
                     ),
                   ),
                   SizedBox(height: 25),
-                  Text(gender),
+                  Text(
+                    gender,
+                    style: TextStyle(
+                      fontFamily: 'SF-Pro-Display-Bold',
+                      fontSize: 20,
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                  ),
                   CupertinoSwitch(
                     value: male,
                     onChanged: (value) {
@@ -76,9 +93,19 @@ class _EnterDetailsPageState extends State<EnterDetailsPage> {
                     },
                   ),
                   SizedBox(height: 25),
-                  Text('if you verified with email click on Refresh'),
+                  Text(
+                    'if you verified with email click on Refresh',
+                    style: TextStyle(
+                      fontFamily: 'SF-Pro-Display-Bold',
+                      fontSize: 16,
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                  ),
                   IconButton(
-                      icon: Icon(Icons.refresh),
+                      icon: Icon(
+                        Icons.refresh,
+                        color: Color.fromRGBO(255, 255, 255, 0.84),
+                      ),
                       onPressed: () {
                         widget.auth.reloadUserStatus();
                       }),
@@ -87,15 +114,25 @@ class _EnterDetailsPageState extends State<EnterDetailsPage> {
                           color: CupertinoColors.systemRed,
                           child: Text('Submit'),
                           onPressed: () async {
-                            StudentDetails data = StudentDetails(
-                              dob: dateTimeX,
-                              firstTime: true,
-                              name: name,
-                              uid: widget.database.uid,
-                              gender: gender,
-                              email: widget.database.email,
-                            );
-                            await widget.database.createStudent(data);
+                            if (name.isEmpty) {
+                              throw Exception('Enter Your name');
+                            }
+                            if (!widget.auth.verifiedUser) {
+                              throw Exception('Verify Your Email');
+                            }
+                            try {
+                              StudentDetails data = StudentDetails(
+                                dob: dateTimeX,
+                                firstTime: true,
+                                name: name,
+                                uid: widget.database.uid,
+                                gender: gender,
+                                email: widget.database.email,
+                              );
+                              await widget.database.createStudent(data);
+                            } catch (e) {
+                              dialog(context, e.message);
+                            }
                           })
                       : CupertinoButton(
                           color: CupertinoColors.systemRed,
