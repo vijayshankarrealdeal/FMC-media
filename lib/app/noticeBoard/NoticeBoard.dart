@@ -36,7 +36,7 @@ class NoticeBoardExtended extends StatelessWidget {
         ),
       ),
       body: not == null
-          ? Center(child: CircularProgressIndicator())
+          ? Center(child: CupertinoActivityIndicator())
           : Container(
               child: ListView.builder(
                   itemCount: not.length,

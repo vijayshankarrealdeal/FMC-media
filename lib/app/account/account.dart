@@ -70,7 +70,7 @@ class AccountExtends extends StatelessWidget {
         ],
       ),
       body: data == null
-          ? Center(child: CircularProgressIndicator())
+          ? Center(child: CupertinoActivityIndicator())
           : SafeArea(
               child: Container(
                 child: Padding(

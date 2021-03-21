@@ -42,7 +42,7 @@ class LeaderBoardExtends extends StatelessWidget {
         ),
       ),
       body: df == null
-          ? Center(child: CircularProgressIndicator())
+          ? Center(child: CupertinoActivityIndicator())
           : Container(
               margin: EdgeInsets.only(top: 18.0),
               child: ListView.builder(
@@ -102,7 +102,7 @@ class UIEXS extends StatelessWidget {
                             ? Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(13.0),
-                                  color: Colors.red,
+                                  color: CupertinoColors.black,
                                   image: DecorationImage(
                                     image: CachedNetworkImageProvider(
                                       df.fisrt,
@@ -144,7 +144,7 @@ class UIEXS extends StatelessWidget {
                                                   CupertinoIcons.heart_fill,
                                                   size: 100,
                                                   color:
-                                                      CupertinoColors.systemRed,
+                                                  Color.fromRGBO(255, 69, 58, 1),
                                                 ),
                                               )
                                             : SizedBox(height: 0),

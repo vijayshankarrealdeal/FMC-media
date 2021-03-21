@@ -130,7 +130,7 @@ class _LoginSignState extends State<LoginSign> {
                             }
                           }
                         })
-                    : CircularProgressIndicator(),
+                    : CupertinoActivityIndicator(),
                 CupertinoButton(
                     child: Text(
                       secondaryText,
