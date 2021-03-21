@@ -47,6 +47,6 @@ FMC-MEDIA/android/app/google-services.json
 main.dart
 lib/services/database.dart
 lib/services/auth.dart
-lib
+lib/*
 
 
