@@ -97,7 +97,7 @@ class _LoginSignState extends State<LoginSign> {
                 SizedBox(height: 20),
                 isSpin
                     ? CupertinoButton(
-                        color: CupertinoColors.systemRed,
+                        color: Color.fromRGBO(255, 69, 58, 1),
                         child: Text(primaryText),
                         onPressed: () async {
                           if (_formType == LoginLogics.signIn) {

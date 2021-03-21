@@ -44,7 +44,7 @@ class NoticeBoardExtended extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.28,
+                        height: MediaQuery.of(context).size.height * 0.34,
                         decoration: BoxDecoration(
                           color: Color.fromRGBO(38, 38, 41, 1),
                           borderRadius: BorderRadius.circular(12.0),

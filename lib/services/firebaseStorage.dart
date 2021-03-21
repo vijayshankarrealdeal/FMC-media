@@ -24,7 +24,12 @@ class StorageX extends ChangeNotifier {
   }
 
   void uploadTaskBegin() {
-    uploadStart = !uploadStart;
+    uploadStart = true;
+    notifyListeners();
+  }
+
+  void uploadTaskend() {
+    uploadStart = false;
     notifyListeners();
   }
 

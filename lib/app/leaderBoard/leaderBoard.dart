@@ -27,44 +27,44 @@ class LeaderBoardExtends extends StatelessWidget {
     final db = Provider.of<Database>(context);
 
     final df = Provider.of<List<LeaderBoardModel>>(context);
-    return df == null
-        ? Center(child: CircularProgressIndicator())
-        : Scaffold(
-            backgroundColor: CupertinoColors.black,
-            appBar: AppBar(
-              elevation: 0,
-              backgroundColor: Color.fromRGBO(29, 29, 29, 1),
-              title: Text(
-                'Home',
-                style: TextStyle(
-                  fontFamily: 'SF-Pro-Display-Bold',
-                  fontSize: 34,
-                  color: Color.fromRGBO(255, 255, 255, 1),
-                ),
-              ),
-            ),
-            body: Container(
-                margin: EdgeInsets.only(top: 18.0),
-                child: ListView.builder(
-                    itemCount: df.length,
-                    itemBuilder: (context, i) {
-                      return MultiProvider(
-                        providers: [
-                          ChangeNotifierProvider<StateHearShowS>(
-                              create: (context) => StateHearShowS()),
-                          StreamProvider<List<SearchAndMatchUser>>.value(
-                              value: db.filterStudent(df[i].uid),
-                              initialData: null),
-                          StreamProvider<List<Likes>>.value(
-                              value: db.getLikes(df[i].imagesId),
-                              initialData: null),
-                        ],
-                        child: UIEXS(
-                          df: df[i],
-                        ),
-                      );
-                    })),
-          );
+    return Scaffold(
+      backgroundColor: CupertinoColors.black,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Color.fromRGBO(29, 29, 29, 1),
+        title: Text(
+          'Home',
+          style: TextStyle(
+            fontFamily: 'SF-Pro-Display-Bold',
+            fontSize: 34,
+            color: Color.fromRGBO(255, 255, 255, 1),
+          ),
+        ),
+      ),
+      body: df == null
+          ? Center(child: CircularProgressIndicator())
+          : Container(
+              margin: EdgeInsets.only(top: 18.0),
+              child: ListView.builder(
+                  itemCount: df.length,
+                  itemBuilder: (context, i) {
+                    return MultiProvider(
+                      providers: [
+                        ChangeNotifierProvider<StateHearShowS>(
+                            create: (context) => StateHearShowS()),
+                        StreamProvider<List<SearchAndMatchUser>>.value(
+                            value: db.filterStudent(df[i].uid),
+                            initialData: null),
+                        StreamProvider<List<Likes>>.value(
+                            value: db.getLikes(df[i].imagesId),
+                            initialData: null),
+                      ],
+                      child: UIEXS(
+                        df: df[i],
+                      ),
+                    );
+                  })),
+    );
   }
 }
 
