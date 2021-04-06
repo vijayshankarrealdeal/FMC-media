@@ -33,19 +33,16 @@
 
 # Web related
 lib/generated_plugin_registrant.dart
+
 # Symbolication related
 app.*.symbols
 
 # Obfuscation related
 app.*.map.json
-android/key.properties
+
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
 /android/app/release
-FMC-MEDIA/android/app/google-services.json
-main.dart
+assets
 google-services.json
-
-
-

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fmc/app/leaderBoard/state.dart';
@@ -79,9 +78,9 @@ class UIEXS extends StatelessWidget {
     final derr = Provider.of<StateHearShowS>(context);
 
     return dsf == null
-        ? Center(child: CircularProgressIndicator())
+        ? Center(child: CupertinoActivityIndicator())
         : likes == null
-            ? Center(child: CircularProgressIndicator())
+            ? Center(child: CupertinoActivityIndicator())
             : GestureDetector(
                 onDoubleTap: () async {
                   derr.show();
@@ -104,7 +103,7 @@ class UIEXS extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(13.0),
                                   color: CupertinoColors.black,
                                   image: DecorationImage(
-                                    image: CachedNetworkImageProvider(
+                                    image: NetworkImage(
                                       df.fisrt,
                                     ),
                                     fit: BoxFit.cover,
@@ -143,8 +142,8 @@ class UIEXS extends StatelessWidget {
                                                 child: Icon(
                                                   CupertinoIcons.heart_fill,
                                                   size: 100,
-                                                  color:
-                                                  Color.fromRGBO(255, 69, 58, 1),
+                                                  color: Color.fromRGBO(
+                                                      255, 69, 58, 1),
                                                 ),
                                               )
                                             : SizedBox(height: 0),
@@ -160,10 +159,7 @@ class UIEXS extends StatelessWidget {
                                         Row(
                                           children: [
                                             CircleAvatar(
-                                              backgroundImage:
-                                                  CachedNetworkImageProvider(
-                                                "https://firebasestorage.googleapis.com/v0/b/fmc-media.appspot.com/o/Windows-10-user-icon-big.png?alt=media&token=a02afb6d-aa9b-44fb-a2a5-13aa4fb4bdca",
-                                              ),
+                                              backgroundImage: AssetImage('images/1.png'),
                                             ),
                                             Padding(
                                               padding:

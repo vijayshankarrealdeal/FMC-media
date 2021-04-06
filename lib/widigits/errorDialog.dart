@@ -56,7 +56,7 @@ Future<void> logoutdialogX(BuildContext context, Auth auth) {
           data: ThemeData.dark(),
           child: CupertinoAlertDialog(
             title: Text(
-              'Blog',
+              'FMC',
               style: TextStyle(
                 color: Color.fromRGBO(255, 255, 255, 1),
                 fontFamily: 'SF-Pro-Text-Semibold',

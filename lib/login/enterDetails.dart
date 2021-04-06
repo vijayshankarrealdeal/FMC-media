@@ -22,6 +22,7 @@ class EnterDetailsPage extends StatefulWidget {
 class _EnterDetailsPageState extends State<EnterDetailsPage> {
   String dateTimeX = '';
   bool male = false;
+  bool isSpin = false;
   String gender = 'Female';
   TextEditingController _name = TextEditingController();
   String get name => _name.text;
@@ -65,8 +66,12 @@ class _EnterDetailsPageState extends State<EnterDetailsPage> {
                     ),
                   ),
                   Container(
-                    color: Color.fromRGBO(118, 118, 118, 0.24),
                     height: MediaQuery.of(context).size.height * 0.15,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.0),
+                      color: Color.fromRGBO(118, 118, 118, 0.44),
+                    ),
+
                     child: CupertinoDatePicker(
                       mode: CupertinoDatePickerMode.date,
                       onDateTimeChanged: (DateTime dateTime) {
@@ -93,33 +98,38 @@ class _EnterDetailsPageState extends State<EnterDetailsPage> {
                     },
                   ),
                   SizedBox(height: 25),
-                  Text(
-                    'if you verified with email click on Refresh',
-                    style: TextStyle(
-                      fontFamily: 'SF-Pro-Display-Bold',
-                      fontSize: 16,
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                    ),
-                  ),
-                  IconButton(
-                      icon: Icon(
-                        Icons.refresh,
-                        color: Color.fromRGBO(255, 255, 255, 0.84),
-                      ),
-                      onPressed: () {
-                        widget.auth.reloadUserStatus();
-                      }),
-                  widget.auth.verifiedUser
-                      ? CupertinoButton(
+                  // Text(
+                  //   'if you verified with email click on Refresh',
+                  //   style: TextStyle(
+                  //     fontFamily: 'SF-Pro-Display-Bold',
+                  //     fontSize: 16,
+                  //     color: Color.fromRGBO(255, 255, 255, 1),
+                  //   ),
+                  // ),
+                  // IconButton(
+                  //     icon: Icon(
+                  //       Icons.refresh,
+                  //       color: Color.fromRGBO(255, 255, 255, 0.84),
+                  //     ),
+                  //     onPressed: () {
+                  //       widget.auth.reloadUserStatus();
+                  //     }),
+          !isSpin?         CupertinoButton(
                           color: CupertinoColors.systemRed,
                           child: Text('Submit'),
                           onPressed: () async {
+                            setState(() {
+                              isSpin = true;
+                            });
                             if (name.isEmpty) {
-                              throw Exception('Enter Your name');
+                              dialog(context,"Enter Your Name");
+                              setState(() {
+                                isSpin = false;
+                              });
                             }
-                            if (!widget.auth.verifiedUser) {
-                              throw Exception('Verify Your Email');
-                            }
+                            // if (!widget.auth.verifiedUser) {
+                            //   throw Exception('Verify Your Email');
+                            // }
                             try {
                               StudentDetails data = StudentDetails(
                                 dob: dateTimeX,
@@ -132,15 +142,18 @@ class _EnterDetailsPageState extends State<EnterDetailsPage> {
                               await widget.database.createStudent(data);
                             } catch (e) {
                               dialog(context, e.message);
+                              setState(() {
+                                isSpin = false;
+                              });
                             }
-                          })
-                      : CupertinoButton(
-                          color: CupertinoColors.systemRed,
-                          child: Text('Verify First'),
-                          onPressed: () async {
-                            widget.auth.verifyEmail();
-                            print('pressed');
-                          }),
+                          }):CupertinoActivityIndicator(
+                      // : CupertinoButton(
+                      //     color: CupertinoColors.systemRed,
+                      //     child: Text('Verify First'),
+                      //     onPressed: () async {
+                      //       widget.auth.verifyEmail();
+                      //       print('pressed');
+                           ),
                 ],
               ),
             ),
