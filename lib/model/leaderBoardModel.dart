@@ -4,6 +4,9 @@ class LeaderBoardModel {
   final String uid;
   final String imagesId;
   final String fisrt;
+  final String email;
+  final String name;
+  final Map<String, dynamic> likes;
   final String second;
   final String third;
   final String fourth;
@@ -13,6 +16,9 @@ class LeaderBoardModel {
       this.fisrt,
       this.second,
       this.third,
+      this.email,
+      this.name,
+      this.likes,
       this.fourth,
       this.time,
       this.uid,
@@ -22,6 +28,9 @@ class LeaderBoardModel {
       return null;
     } else {
       return LeaderBoardModel(
+        email: data['email'] ?? "",
+        name: data['name'] ?? "",
+        likes: data['likes'] ?? {},
         uploadUrl: data['uploadUrl'] ?? '',
         uid: data['uid'] ?? '',
         time: data['time'] ?? '',

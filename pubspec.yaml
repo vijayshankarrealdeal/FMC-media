@@ -42,9 +42,13 @@ dev_dependencies:
   path_provider: ^2.0.1
   uuid: ^3.0.1
   rxdart: ^0.26.0
+  flutter_native_image: ^0.0.6
   image_picker: ^0.7.3
   percent_indicator: ^2.1.9+1
   tflite: ^1.1.1
+  cached_network_image: ^3.0.0
+  carousel_pro: ^1.0.0
+  flutter_image_compress: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

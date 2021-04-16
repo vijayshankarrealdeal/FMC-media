@@ -31,23 +31,19 @@ class Database extends ChangeNotifier {
 
   }
 
-  Future<void> addLikes(Likes data, String imageId) async {
+  Future<void> addLikes(String imageId) async {
     await _dbrefrence
-        .collection('likes')
+        .collection('images')
         .doc(imageId)
-        .collection('UserData')
-        .doc(uid)
-        .set(data.toJson());
+        .update({'likes.$uid':true});
     notifyListeners();
   }
 
   Future<void> disLikes(String imageId) async {
     await _dbrefrence
-        .collection('likes')
+        .collection('images')
         .doc(imageId)
-        .collection('UserData')
-        .doc(uid)
-        .delete();
+       .update({'likes.$uid':false});
     notifyListeners();
   }
 

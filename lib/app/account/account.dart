@@ -5,8 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fmc/model/admin.dart';
-import 'package:fmc/model/aiModel.dart';
-
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fmc/model/studentDetail.dart';
 import 'package:fmc/model/studentUpload.dart';
 import 'package:fmc/services/AI.dart';
@@ -62,7 +61,6 @@ class _AccountExtendsState extends State<AccountExtends> {
 
   Future<File> getImageFileFromAssets(Asset asset) async {
     final byteData = await asset.getByteData();
-
     final tempFile =
         File("${(await getTemporaryDirectory()).path}/${asset.name}");
     final file = await tempFile.writeAsBytes(
@@ -79,10 +77,22 @@ class _AccountExtendsState extends State<AccountExtends> {
     final ref = _refrence.ref().child(fileUrl);
     await ref.delete();
   }
-
+  Future<Uint8List> testComporessList(Uint8List list) async {
+    print("I am Hereraefsfsfefejngjsn");
+    var result = await FlutterImageCompress.compressWithList(
+      list,
+      minHeight: 520,
+      minWidth: 580,
+      quality: 62,
+    );
+    return result;
+  }
   Future saveImage(Asset asset) async {
     ByteData byteData = await asset.getByteData();
-    List<int> imageData = byteData.buffer.asUint8List();
+    Uint8List listx = byteData.buffer.asUint8List();
+    List<int> imageData =
+        await testComporessList(listx);
+
     Reference ref = _refrence.ref().child(DateTime.now().toString());
     UploadTask uploadTask = ref.putData(imageData);
     setState(() {
@@ -289,44 +299,53 @@ class _AccountExtendsState extends State<AccountExtends> {
                                                       fontFamily:
                                                           'SF-Pro-Display-Bold')),
                                               onPressed: () async {
-                                                try {
-                                                  for (int i = 0;
-                                                      i < images.length;
-                                                      i++) {
-                                                    final file =
-                                                        await getImageFileFromAssets(
-                                                            images[i]);
-                                                    final res = await aiengine
-                                                        .runModel(file);
-                                                    res.forEach(
-                                                        (element) async {
-                                                      if (element['label'] !=
-                                                              "sexy" ||
-                                                          element['label'] !=
-                                                              "porn") {
-                                                        await saveImage(
-                                                            images[i]);
-                                                      } else {
-                                                        await widget.da
-                                                            .addNOTDATAImages(
-                                                                StudentUpload(
-                                                                  imagesId: '',
-                                                                  uid: widget
-                                                                      .da.uid,
-                                                                  time: DateTime
-                                                                          .now()
-                                                                      .toString(),
-                                                                  uploadUrl: '',
-                                                                ),
-                                                                idF);
 
-                                                        dialog(context,
-                                                            "This is not Correct according to guidelines");
-                                                      }
-                                                    });
+                                                try {
+
+                                                    for (int i = 0;
+                                                    i < images.length;
+                                                    i++) {
+                                                      final file =
+                                                      await getImageFileFromAssets(
+                                                          images[i]);
+
+                                                      final res = await aiengine
+                                                          .runModel(file);
+                                                      res.forEach(
+                                                              (element) async {
+                                                            if (element['label']  !=
+                                                                "sexy" || element["confidence"]<88.0||
+                                                                element['label'] !=
+                                                                    "porn") {
+                                                              await saveImage(
+                                                                  images[i]);
+                                                            } else {
+                                                              await widget.da
+                                                                  .addNOTDATAImages(
+                                                                  StudentUpload(
+                                                                    name:details.name,
+                                                                    email: details.email,
+                                                                    likes: {},
+                                                                    imagesId: '',
+                                                                    uid: widget
+                                                                        .da.uid,
+                                                                    time: DateTime
+                                                                        .now()
+                                                                        .toString(),
+                                                                    uploadUrl: '',
+                                                                  ),
+                                                                  idF);
+
+                                                              dialog(context,
+                                                                  "This is not Correct according to guidelines");
+                                                            }
+                                                          });
+
                                                   }
+
                                                 } catch (e) {
                                                   dialog(context, e.message);
+                                                  print(e.message);
                                                 }
                                                 images.clear();
                                               },
@@ -362,6 +381,9 @@ class _AccountExtendsState extends State<AccountExtends> {
                                                 onPressed: () async {
                                                   await widget.da.addImages(
                                                       StudentUpload(
+                                                        name:details.name,
+                                                        email: details.email,
+                                                        likes: {},
                                                         imagesId: idF,
                                                         uid: widget.da.uid,
                                                         time: DateTime.now()

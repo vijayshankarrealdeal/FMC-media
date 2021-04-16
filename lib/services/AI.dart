@@ -7,7 +7,7 @@ class AiEngine {
     String res = await Tflite.loadModel(
         model: "assets/model.tflite",
         labels: "assets/labels.txt",
-        numThreads: 1, // defaults to 1
+        numThreads: 2, // defaults to 1
         isAsset:
             true, // defaults to true, set to false to load resources outside assets
         useGpuDelegate:
@@ -21,10 +21,11 @@ class AiEngine {
         path: asset.path, // required
         imageMean: 0.0, // defaults to 117.0
         imageStd: 255.0, // defaults to 1.0
-        numResults: 1, // defaults to 5
+        numResults: 2, // defaults to 5
         threshold: 0.2, // defaults to 0.1
         asynch: true // defaults to true
         );
-   return recognitions;
+    print(recognitions);
+    return recognitions;
   }
 }
