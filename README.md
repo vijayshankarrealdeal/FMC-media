@@ -1,6 +1,7 @@
 # FMC
 
 ## This is official app code for FMC IIIT-Kalyani 
+## make contribution.
 ![Alt text](images/Component.png?raw=true "All Done")
 
 ## You cannot use this repo for your personal use

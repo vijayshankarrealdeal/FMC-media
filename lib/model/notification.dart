@@ -2,9 +2,9 @@ class Notificationxx {
   final String title;
   final String subTitle;
   final String details;
-  final String deadLine;
+  final bool isEventOver;
 
-  Notificationxx({this.title, this.subTitle, this.details, this.deadLine});
+  Notificationxx({this.title, this.subTitle, this.details, this.isEventOver});
   factory Notificationxx.fromMap(Map<String, dynamic> data) {
     if (data == null) {
       return null;
@@ -13,7 +13,7 @@ class Notificationxx {
         title: data['title'] ?? '',
         subTitle: data['subTitle'] ?? '',
         details: data['details'] ?? '',
-        deadLine: data['deadLine'] ?? '',
+        isEventOver: data['isEventOver'] ?? false,
       );
     }
   }
